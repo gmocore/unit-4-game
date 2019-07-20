@@ -4,6 +4,49 @@
     // base attack
     // attack
     // counter attack
+    const leo = {
+        health: 100,
+        baseAttack: 10,
+        attack: 0,
+        counterAttack: 5,
+        selectedPlayer: false,
+        selectedOpponent: false,
+        id: 'leo'
+    }
+    
+    const brad = {
+        health: 125,
+        baseAttack: 15,
+        attack: 0,
+        counterAttack: 10,
+        selectedPlayer: false,
+        selectedOpponent: false
+    }
+    const idris = {
+        health: 140,
+        baseAttack: 8,
+        attack: 0,
+        counterAttack: 8,
+        selectedPlayer: false,
+        selectedOpponent: false
+    }
+    const aubrey = {
+        health: 80,
+        baseAttack: 25,
+        attack: 0,
+        counterAttack: 15,
+        selectedPlayer: false,
+        selectedOpponent: false
+    }
+
+    const characters = document.querySelectorAll('.character')
+
+    characters.forEach(item => {
+        item.addEventListener('click', () => {
+           console.log(item.id);
+           
+        })
+    })
 
 // create event listener for:
     // select character (player)
