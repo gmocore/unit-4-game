@@ -12,36 +12,28 @@ const characters = {
     health: 100,
     baseAttack: 10,
     attack: 10,
-    counterAttack: 5,
-    selectedPlayer: false,
-    selectedOpponent: false
+    counterAttack: 25
   },
   brad: {
     name: "brad",
     health: 125,
     baseAttack: 15,
     attack: 15,
-    counterAttack: 10,
-    selectedPlayer: false,
-    selectedOpponent: false
+    counterAttack: 20
   },
   idris: {
     name: "idris",
     health: 140,
     baseAttack: 8,
     attack: 8,
-    counterAttack: 8,
-    selectedPlayer: false,
-    selectedOpponent: false
+    counterAttack: 18
   },
   aubrey: {
     name: "aubrey",
     health: 80,
     baseAttack: 25,
     attack: 25,
-    counterAttack: 15,
-    selectedPlayer: false,
-    selectedOpponent: false
+    counterAttack: 30  
   }
 };
 
@@ -50,13 +42,15 @@ $(".character").on("click", function () {
   if (!playerBoolean && !opponentBoolean) {
     playerSelected = $(this).attr("id");
     playerBoolean = true;
+    $(`#${playerSelected}`).appendTo('.selected-player')
     console.log(`player: ${playerSelected}`)
 
   }
 
   else if (playerBoolean && !opponentBoolean) {
     opponentSelected = $(this).attr('id')
-    opponentBoolean = true
+    opponentBoolean = true;
+    $(`#${opponentSelected}`).appendTo('.opponent')
     console.log(`enemy: ${opponentSelected}`);
 
   }
@@ -80,11 +74,14 @@ function playerAttack() {
   characters[opponentSelected].health -= characters[playerSelected].attack;
   characters[playerSelected].attack += characters[playerSelected].baseAttack;
   console.log(`${opponentSelected}`, characters[opponentSelected].health)
+  $('.attack-text').text(`${playerSelected} attacked ${opponentSelected} for ${characters[playerSelected].attack} points`)
 }
 
 function opponentCounter() {
   characters[playerSelected].health -= characters[opponentSelected].counterAttack;
   console.log(`${playerSelected}`, characters[playerSelected].health)
+  $('.counter-attack-text').text(`${opponentSelected} counter attacked ${playerSelected} for ${characters[opponentSelected].counterAttack} points`)
+
 }
 
 function checkHealth() {
