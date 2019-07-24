@@ -1,9 +1,4 @@
-//create object for each character
-// image
-// health
-// base attack
-// attack
-// counter attack
+const characterImages = document.querySelectorAll(".character");
 let playerSelected;
 let playerBoolean = false;
 let opponentSelected;
@@ -50,10 +45,9 @@ const characters = {
   }
 };
 
-const characterImages = document.querySelectorAll(".character");
 
 $(".character").on("click", function () {
-  if (!playerSelected && !opponentSelected) {
+  if (!playerBoolean && !opponentBoolean) {
     playerSelected = $(this).attr("id");
     playerBoolean = true;
     console.log(`player: ${playerSelected}`)
@@ -66,14 +60,6 @@ $(".character").on("click", function () {
     console.log(`enemy: ${opponentSelected}`);
 
   }
-
-  characterImages.forEach(item => {
-    if (item.id !== playerSelected) {
-      $(item).appendTo(".opponent");
-    } else {
-      $(item).appendTo(".selected-player");
-    }
-  });
 });
 
 $(".attack-button").click(event => {
@@ -102,30 +88,41 @@ function opponentCounter() {
 }
 
 function checkHealth() {
-  if (!playerDefeated) {
-    if (characters[playerSelected].health <= 0 && characters[opponentSelected].health > 0) {
-      playerDefeated = true;
-      if (playerDefeated) {
-        console.log('game over')
-      }
+  if (characters[playerSelected].health <= 0) {
+    playerDefeated = true;
+    if (playerDefeated) {
+      console.log('game over')
     }
-    else if (characters[opponentSelected].health <= 0 && characters[playerSelected].health > 0) {
-      if (!opponentDefeated) {
-        opponentDefeated = true;
-        if (opponentDefeated) {
-          console.log('you win');
-          $(`#${opponentSelected}`).remove()
-        }
-
-      }
-    }
-
   }
 
-  // else if(characters[opponentSelected].health <= 0 && characters[playerSelected].health <= 0) {
-  //   console.log('both dead')
-  // }
+  if (characters[playerSelected].health > 0 && characters[opponentSelected].health <= 0) {
+    opponentDefeated = true;
+    if (opponentDefeated) {
+      $(`#${opponentSelected}`).remove();
+      opponentBoolean = false
+      console.log('you win');
+    }
+  }
 }
+
+
+
+
+
+// checkHealth Function Pseudo
+// if player heath < 0 && oponent health is > 0
+// then player defeated = true
+// if player defeated = true
+// console log game over
+
+// if player health > 0 && openent < 0
+// then openent defeated = true
+// if openent defeated = true
+// remove openent
+// openentboolean = false
+// console.log you win
+
+
 
 
 
