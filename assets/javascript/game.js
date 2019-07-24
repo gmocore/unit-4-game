@@ -8,6 +8,8 @@ let playerSelected;
 let playerBoolean = false;
 let opponentSelected;
 let opponentBoolean = false;
+let playerDefeated;
+let opponentDefeated;
 
 const characters = {
   leo: {
@@ -50,19 +52,19 @@ const characters = {
 
 const characterImages = document.querySelectorAll(".character");
 
-$(".character").on("click", function() {
-  if(!playerSelected && !opponentSelected) {
+$(".character").on("click", function () {
+  if (!playerSelected && !opponentSelected) {
     playerSelected = $(this).attr("id");
     playerBoolean = true;
-    console.log(characters[playerSelected].baseAttack, playerBoolean)
+    console.log(`player: ${playerSelected}`)
 
   }
-  
+
   else if (playerBoolean && !opponentBoolean) {
     opponentSelected = $(this).attr('id')
     opponentBoolean = true
-    console.log(characters[opponentSelected].counterAttack, opponentBoolean);
-    
+    console.log(`enemy: ${opponentSelected}`);
+
   }
 
   characterImages.forEach(item => {
@@ -78,7 +80,8 @@ $(".attack-button").click(event => {
   console.log("attack");
   if (playerSelected && opponentSelected) {
     playerAttack();
-    opponentCounter()
+    opponentCounter();
+    checkHealth();
   }
 });
 
@@ -88,14 +91,43 @@ $(".reset-button").click(event => {
 
 
 function playerAttack() {
-  characters[opponentSelected].health -= characters[playerSelected].baseAttack;
-  console.log(characters[opponentSelected].health)
+  characters[opponentSelected].health -= characters[playerSelected].attack;
+  characters[playerSelected].attack += characters[playerSelected].baseAttack;
+  console.log(`${opponentSelected}`, characters[opponentSelected].health)
 }
 
 function opponentCounter() {
   characters[playerSelected].health -= characters[opponentSelected].counterAttack;
-  console.log(characters[playerSelected].health)
+  console.log(`${playerSelected}`, characters[playerSelected].health)
 }
+
+function checkHealth() {
+  if (!playerDefeated) {
+    if (characters[playerSelected].health <= 0 && characters[opponentSelected].health > 0) {
+      playerDefeated = true;
+      if (playerDefeated) {
+        console.log('game over')
+      }
+    }
+    else if (characters[opponentSelected].health <= 0 && characters[playerSelected].health > 0) {
+      if (!opponentDefeated) {
+        opponentDefeated = true;
+        if (opponentDefeated) {
+          console.log('you win');
+          $(`#${opponentSelected}`).remove()
+        }
+
+      }
+    }
+
+  }
+
+  // else if(characters[opponentSelected].health <= 0 && characters[playerSelected].health <= 0) {
+  //   console.log('both dead')
+  // }
+}
+
+
 
 // create event listener for:
 // select character (player)
