@@ -1,36 +1,40 @@
+// VARIABLES
+
 const characterImages = document.querySelectorAll(".character");
-let playerSelected;
-let opponentSelected;
+let player;
+let opponent;
 let playerBoolean = false;
 let opponentBoolean = false;
 let playerDefeated;
 let opponentDefeated;
 let opponentsRemaining = 3;
 
+// CHARACTER OBJECTS
+
 const characters = {
   leo: {
-    name: "leo",
+    name: "Leonardo DiCaprio, actor extraordinaire",
     health: 100,
     baseAttack: 10,
     attack: 10,
     counterAttack: 11
   },
   brad: {
-    name: "brad",
+    name: "Brad Pitt, he was in fight club. enough said",
     health: 125,
     baseAttack: 15,
     attack: 15,
     counterAttack: 12
   },
   idris: {
-    name: "idris",
+    name: "Idris Elba, the ebony dream boat",
     health: 140,
     baseAttack: 8,
     attack: 8,
     counterAttack: 8
   },
   aubrey: {
-    name: "aubrey",
+    name: "Audrey Plaza, the glare apparent",
     health: 80,
     baseAttack: 25,
     attack: 25,
@@ -38,139 +42,117 @@ const characters = {
   }
 };
 
+//EVENT LISTENERs
+
 $(".character").on("click", function() {
   if (!playerBoolean && !opponentBoolean) {
-    playerSelected = $(this).attr("id");
-    playerBoolean = true;
-    $(`#${playerSelected}`).appendTo(".selected-player");
-    console.log(`player: ${playerSelected}`);
+    // used to access character object
+    player = $(this).attr("id");
+    // displays player info to screen
+    playerSelection();
   } else if (playerBoolean && !opponentBoolean) {
-    opponentSelected = $(this).attr("id");
-    opponentBoolean = true;
-    $(`#${opponentSelected}`).appendTo(".opponent");
-    console.log(`enemy: ${opponentSelected}`);
-    displayItems();
+    // used to acces charcter object
+    opponent = $(this).attr("id");
+    // displays opponent info to screen
+    opponentSelection();
   }
 });
 
 $(".attack-button").click(event => {
-  console.log("attack");
-  if (playerSelected && opponentSelected) {
+  if (player && opponent) {
     playerAttack();
     opponentCounter();
+    //update health on screen
     checkHealth();
   }
 });
 
 $(".reset-button").click(event => {
-  console.log("reset");
   location.reload();
 });
 
+// FUNCTIONS
+
 function playerAttack() {
-  characters[opponentSelected].health -= characters[playerSelected].attack;
-  characters[playerSelected].attack += characters[playerSelected].baseAttack;
-  console.log(`${opponentSelected}`, characters[opponentSelected].health);
+  characters[opponent].health -= characters[player].attack;
+  characters[player].attack += characters[player].baseAttack;
   $(".attack-text").text(
-    `${playerSelected} attacked ${opponentSelected} for ${
-      characters[playerSelected].attack
-    } points`
+    `${player} attacked ${opponent} for ${characters[player].attack} points`
   );
+  // update player's health
   healthRemaining();
 }
 
 function opponentCounter() {
-  characters[playerSelected].health -=
-    characters[opponentSelected].counterAttack;
-  console.log(`${playerSelected}`, characters[playerSelected].health);
+  characters[player].health -= characters[opponent].counterAttack;
   $(".counter-attack-text").text(
-    `${opponentSelected} counter attacked ${playerSelected} for ${
-      characters[opponentSelected].counterAttack
+    `${opponent} counter attacked ${player} for ${
+      characters[opponent].counterAttack
     } points`
   );
   healthRemaining();
 }
 
 function checkHealth() {
-  if (characters[playerSelected].health <= 0) {
+  // check player health
+  if (characters[player].health <= 0) {
     playerDefeated = true;
+    // game over
     if (playerDefeated) {
-      console.log("game over");
-      $(`#${playerSelected}`).fadeOut();
+      $(`#${player}`).fadeOut();
       $(".attack-button").addClass("hide");
-
       $(".attack-text").text("YOU LOST");
-      $(".counter-attack-text").text("you are better than this!");
+      $(".health").text("YOU LOST");
+      $(".counter-attack-text").text("you will NEVER be famous now!!");
     }
   }
 
-  if (
-    characters[playerSelected].health > 0 &&
-    characters[opponentSelected].health <= 0
-  ) {
+  // check enemy health
+  if (characters[player].health > 0 && characters[opponent].health <= 0) {
     opponentDefeated = true;
-
+    // enemy defeated
     if (opponentDefeated) {
-      $(`#${opponentSelected}`).fadeOut();
+      $(`#${opponent}`).fadeOut();
       $(".attack-button").addClass("hide");
       opponentBoolean = false;
       opponentsRemaining--;
-      console.log("you win");
+
+      //game win
       if (opponentsRemaining === 0) {
-        console.log("victory");
         $(".attack-text").text("YOU WON");
-        $(".counter-attack-text").text("you have what it takes!");
+        $(".counter-attack-text").text("you are gonna be a big star!");
       }
     }
   }
 }
 
 function healthRemaining() {
-  $("#opponent-health-remaining").text(characters[opponentSelected].health);
-  $("#player-health-remaining").text(characters[playerSelected].health);
+  $("#opponent-health-remaining").text(characters[opponent].health);
+  $("#player-health-remaining").text(characters[player].health);
 }
 
+// updates info on screen
 function displayItems() {
   $(".attack-button").removeClass("hide");
-  $("#player-health-remaining").text(characters[playerSelected].health);
-  $("#opponent-health-remaining").text(characters[opponentSelected].health);
+  $("#player-health-remaining").text(characters[player].health);
+  $("#opponent-health-remaining").text(characters[opponent].health);
   $(".health").removeClass("hide");
+  $(".versus-text").removeClass("hide");
 }
 
-// checkHealth Function Pseudo
-// if player heath < 0 && oponent health is > 0
-// then player defeated = true
-// if player defeated = true
-// console log game over
+// sets player values
+function playerSelection() {
+  playerBoolean = true;
+  $(`#${player}`).appendTo(".selected-player");
+  $(".attack-text").text(characters[player].name);
+}
 
-// if player health > 0 && openent < 0
-// then openent defeated = true
-// if openent defeated = true
-// remove openent
-// openentboolean = false
-// console.log you win
-
-// create event listener for:
-// select character (player)
-// select opponent
-// attack
-
-// when player is selected
-// image is moved to fight area
-
-// when opponent is selected
-// opponent moved to defender area
-
-// character attack
-// each attack increments attack by base attack
-// attack decrements hp of oponent by attack value
-
-// opponent attack
-// character attack tigeers counter attack
-// counter decrements player hp
-
-// health
-// if hp is <= 0 player/opponent defeated
-// if player is defeated => game over
-// if opponent is defeated => select new opponent
-// if no opponents remain => player wins
+// sets opponent values
+function opponentSelection() {
+  if (opponent !== player) {
+    opponentBoolean = true;
+    $(`#${opponent}`).appendTo(".opponent");
+    $(".counter-attack-text").text(characters[opponent].name);
+    displayItems();
+  }
+}

@@ -1,92 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Star War</title>
-    <link rel="stylesheet" href="./assets/css/reset.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"
-    ></script>
-  </head>
 
-  <body>
-    <div class="header">
-      <h1 class="title">A Star War</h1>
-      <h4 class="subtitle">Not to be confused with Star Wars &copy</h4>
-    </div>
-    <div class="game-content">
-      <div class="characters">
-        <img
-          id="leo"
-          class="character"
-          src="./assets/images/leonardo-dicaprio-the-wolf-of-wall-street-paramount-pictures-040416-1276x850.jpg"
-          alt=""
-        />
-        <img
-          id="brad"
-          class="character"
-          src="./assets/images/274249be375db57ded53af3d4962d45f.jpeg"
-        />
-        <img
-          id="idris"
-          class="character"
-          src="./assets/images/screen-shot-2019-03-12-at-164638_khxp.910.webp"
-        />
-        <img
-          id="aubrey"
-          class="character"
-          src="./assets/images/eye-aubrey-plaza01.jpg"
-        />
-      </div>
-      <div class="fight-zone">
-        <div class="selected-player">
-          <p class="player-health health hide">
-            Health:
-            <span id="player-health-remaining" class="health-remaining"></span>
-          </p>
-        </div>
-        <div class="versus">
-          <p class="versus-text">
-            VS
-          </p>
-        </div>
-        <div class="opponent">
-          <p class="opponent-health health hide">
-            Health:
-            <span
-              id="opponent-health-remaining"
-              class="health-remaining"
-            ></span>
-          </p>
-        </div>
-      </div>
-      <div class="game-buttons">
-        <div class="attack-button button hide">
-          <button>ATTACK</button>
-        </div>
-        <div class="reset-button button">
-          <button>RESET</button>
-        </div>
-      </div>
-    </div>
-    <div class="fight-text-container">
-      <p class="attack-text">
-        pick a player
-      </p>
-      <p class="counter-attack-text ">
-        pick an opponent
-      </p>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Star War</title>
+  <link rel="stylesheet" href="./assets/css/reset.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+</head>
 
-    <script src="./assets/javascript/game.js"></script>
-  </body>
+<body>
+  <div class="header">
+    <h1 class="title">A Star War</h1>
+    <h4 class="subtitle">Not to be confused with Star Wars &copy</h4>
+  </div>
+  <div class="game-content">
+    <div class="characters">
+      <img id="leo" class="character"
+        src="./assets/images/leonardo-dicaprio-the-wolf-of-wall-street-paramount-pictures-040416-1276x850.jpg" alt="" />
+      <img id="brad" class="character" src="./assets/images/274249be375db57ded53af3d4962d45f.jpeg" />
+      <img id="idris" class="character" src="./assets/images/screen-shot-2019-03-12-at-164638_khxp.910.webp" />
+      <img id="aubrey" class="character" src="./assets/images/eye-aubrey-plaza01.jpg" />
+    </div>
+    <div class="fight-zone">
+      <div class="selected-player">
+        <p class="player-health health hide">
+          Health:
+          <span id="player-health-remaining" class="health-remaining"></span>
+        </p>
+      </div>
+      <div class="versus">
+        <p class="versus-text hide">
+          VS
+        </p>
+      </div>
+      <div class="opponent">
+        <p class="opponent-health health hide">
+          Health:
+          <span id="opponent-health-remaining" class="health-remaining"></span>
+        </p>
+      </div>
+    </div>
+    <div class="game-buttons">
+      <div class="attack-button button hide">
+        <button>ATTACK</button>
+      </div>
+      <div class="reset-button button">
+        <button>RESET</button>
+      </div>
+    </div>
+  </div>
+  <div class="fight-text-container">
+    <p class="attack-text">
+      pick a player
+    </p>
+    <p class="counter-attack-text ">
+      pick an opponent
+    </p>
+  </div>
+
+  <script src="./assets/javascript/game.js"></script>
+</body>
+
 </html>
