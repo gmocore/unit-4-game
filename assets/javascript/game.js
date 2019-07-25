@@ -1,10 +1,11 @@
 const characterImages = document.querySelectorAll(".character");
 let playerSelected;
-let playerBoolean = false;
 let opponentSelected;
+let playerBoolean = false;
 let opponentBoolean = false;
 let playerDefeated;
 let opponentDefeated;
+let opponentsRemaining = 3;
 
 const characters = {
   leo: {
@@ -12,28 +13,28 @@ const characters = {
     health: 100,
     baseAttack: 10,
     attack: 10,
-    counterAttack: 25
+    counterAttack: 11
   },
   brad: {
     name: "brad",
     health: 125,
     baseAttack: 15,
     attack: 15,
-    counterAttack: 20
+    counterAttack: 12
   },
   idris: {
     name: "idris",
     health: 140,
     baseAttack: 8,
     attack: 8,
-    counterAttack: 18
+    counterAttack: 8
   },
   aubrey: {
     name: "aubrey",
     health: 80,
     baseAttack: 25,
     attack: 25,
-    counterAttack: 30  
+    counterAttack: 33  
   }
 };
 
@@ -89,15 +90,27 @@ function checkHealth() {
     playerDefeated = true;
     if (playerDefeated) {
       console.log('game over')
+      $(`#${playerSelected}`).fadeOut()
+      $('.attack-text').text('YOU LOST');
+      $('.counter-attack-text').text('you are better than this!')
+
     }
   }
 
   if (characters[playerSelected].health > 0 && characters[opponentSelected].health <= 0) {
     opponentDefeated = true;
+
     if (opponentDefeated) {
-      $(`#${opponentSelected}`).remove();
-      opponentBoolean = false
+      $(`#${opponentSelected}`).fadeOut();
+      opponentBoolean = false;
+      opponentsRemaining--;
       console.log('you win');
+      if(opponentsRemaining === 0) {
+        console.log('victory');
+        $('.attack-text').text('YOU WON');
+        $('.counter-attack-text').text('you have what it takes!')
+
+      }
     }
   }
 }
