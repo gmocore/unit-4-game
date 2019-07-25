@@ -1,71 +1,88 @@
-
-
-.header {
-    padding: 15px;
+body {
+  font-family: "Courier New", Courier, monospace;
+  background: url("../images/theater.jpg");
+  background-size: contain;
+  color: white;
 }
 
-.title  {
-    text-align: center;
-    font-size: 5em;
-    letter-spacing: 20px;
-    padding: 10px;
+.header {
+  padding: 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 5em;
+  letter-spacing: 20px;
+  padding: 10px;
 }
 
 .subtitle {
-    text-align: center;
-    font-size: 2em;
-    letter-spacing: 1px;
-    padding: 15px;
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 1px;
+  padding: 15px;
 }
 
 img {
-    height: 100px;
-    width: 100px;
-    border-radius: 5px;
-
+  height: 150px;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: 14px 13px 13px -11px rgba(0, 0, 0, 0.75);
 }
 
 .characters {
-    display: flex;
-    justify-content: space-around;
-    padding: 25px;
-    
+  display: flex;
+  justify-content: space-around;
+  padding: 25px;
+  /* width: 65%; */
 }
 
 .fight-zone {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 15px;
+  height: 300px;
 }
 .fight-zone img {
-    height: 250px;
-    width: 250px;
+  height: 250px;
+  width: 250px;
 }
 
 .game-buttons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .button {
-    margin: 10px;
+  margin: 10px;
 }
 
 .button button {
-    font-size: 1.5em;
-    padding: 10px;
-    border-radius: 5px;
+  font-size: 1.5em;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .versus-text {
-    text-align: center;
-    padding: 0 15px 0 15px;
-    font-size: 4em;
+  text-align: center;
+  padding: 0 15px 0 15px;
+  font-size: 4em;
 }
 
 .fight-text-container {
-    display: flex;
-    justify-content: space-evenly;
-    
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.health {
+  text-align: center;
+}
+
+.health-remaining {
+  color: red;
+}
+
+.hide {
+  display: none;
 }

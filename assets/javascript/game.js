@@ -34,26 +34,22 @@ const characters = {
     health: 80,
     baseAttack: 25,
     attack: 25,
-    counterAttack: 33  
+    counterAttack: 33
   }
 };
 
-
-$(".character").on("click", function () {
+$(".character").on("click", function() {
   if (!playerBoolean && !opponentBoolean) {
     playerSelected = $(this).attr("id");
     playerBoolean = true;
-    $(`#${playerSelected}`).appendTo('.selected-player')
-    console.log(`player: ${playerSelected}`)
-
-  }
-
-  else if (playerBoolean && !opponentBoolean) {
-    opponentSelected = $(this).attr('id')
+    $(`#${playerSelected}`).appendTo(".selected-player");
+    console.log(`player: ${playerSelected}`);
+  } else if (playerBoolean && !opponentBoolean) {
+    opponentSelected = $(this).attr("id");
     opponentBoolean = true;
-    $(`#${opponentSelected}`).appendTo('.opponent')
+    $(`#${opponentSelected}`).appendTo(".opponent");
     console.log(`enemy: ${opponentSelected}`);
-
+    displayItems();
   }
 });
 
@@ -68,56 +64,75 @@ $(".attack-button").click(event => {
 
 $(".reset-button").click(event => {
   console.log("reset");
+  location.reload();
 });
-
 
 function playerAttack() {
   characters[opponentSelected].health -= characters[playerSelected].attack;
   characters[playerSelected].attack += characters[playerSelected].baseAttack;
-  console.log(`${opponentSelected}`, characters[opponentSelected].health)
-  $('.attack-text').text(`${playerSelected} attacked ${opponentSelected} for ${characters[playerSelected].attack} points`)
+  console.log(`${opponentSelected}`, characters[opponentSelected].health);
+  $(".attack-text").text(
+    `${playerSelected} attacked ${opponentSelected} for ${
+      characters[playerSelected].attack
+    } points`
+  );
+  healthRemaining();
 }
 
 function opponentCounter() {
-  characters[playerSelected].health -= characters[opponentSelected].counterAttack;
-  console.log(`${playerSelected}`, characters[playerSelected].health)
-  $('.counter-attack-text').text(`${opponentSelected} counter attacked ${playerSelected} for ${characters[opponentSelected].counterAttack} points`)
-
+  characters[playerSelected].health -=
+    characters[opponentSelected].counterAttack;
+  console.log(`${playerSelected}`, characters[playerSelected].health);
+  $(".counter-attack-text").text(
+    `${opponentSelected} counter attacked ${playerSelected} for ${
+      characters[opponentSelected].counterAttack
+    } points`
+  );
+  healthRemaining();
 }
 
 function checkHealth() {
   if (characters[playerSelected].health <= 0) {
     playerDefeated = true;
     if (playerDefeated) {
-      console.log('game over')
-      $(`#${playerSelected}`).fadeOut()
-      $('.attack-text').text('YOU LOST');
-      $('.counter-attack-text').text('you are better than this!')
-
+      console.log("game over");
+      $(`#${playerSelected}`).fadeOut();
+      $(".attack-text").text("YOU LOST");
+      $(".counter-attack-text").text("you are better than this!");
     }
   }
 
-  if (characters[playerSelected].health > 0 && characters[opponentSelected].health <= 0) {
+  if (
+    characters[playerSelected].health > 0 &&
+    characters[opponentSelected].health <= 0
+  ) {
     opponentDefeated = true;
 
     if (opponentDefeated) {
       $(`#${opponentSelected}`).fadeOut();
       opponentBoolean = false;
       opponentsRemaining--;
-      console.log('you win');
-      if(opponentsRemaining === 0) {
-        console.log('victory');
-        $('.attack-text').text('YOU WON');
-        $('.counter-attack-text').text('you have what it takes!')
-
+      console.log("you win");
+      if (opponentsRemaining === 0) {
+        console.log("victory");
+        $(".attack-text").text("YOU WON");
+        $(".counter-attack-text").text("you have what it takes!");
       }
     }
   }
 }
 
+function healthRemaining() {
+  $("#opponent-health-remaining").text(characters[opponentSelected].health);
+  $("#player-health-remaining").text(characters[playerSelected].health);
+}
 
-
-
+function displayItems() {
+  $(".attack-button").removeClass("hide");
+  $("#player-health-remaining").text(characters[playerSelected].health);
+  $("#opponent-health-remaining").text(characters[opponentSelected].health);
+  $(".health").removeClass("hide");
+}
 
 // checkHealth Function Pseudo
 // if player heath < 0 && oponent health is > 0
@@ -131,10 +146,6 @@ function checkHealth() {
 // remove openent
 // openentboolean = false
 // console.log you win
-
-
-
-
 
 // create event listener for:
 // select character (player)
