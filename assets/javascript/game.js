@@ -97,6 +97,8 @@ function checkHealth() {
     if (playerDefeated) {
       console.log("game over");
       $(`#${playerSelected}`).fadeOut();
+      $(".attack-button").addClass("hide");
+
       $(".attack-text").text("YOU LOST");
       $(".counter-attack-text").text("you are better than this!");
     }
@@ -110,6 +112,7 @@ function checkHealth() {
 
     if (opponentDefeated) {
       $(`#${opponentSelected}`).fadeOut();
+      $(".attack-button").addClass("hide");
       opponentBoolean = false;
       opponentsRemaining--;
       console.log("you win");
