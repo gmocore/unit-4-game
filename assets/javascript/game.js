@@ -102,7 +102,7 @@ function checkHealth() {
       $(`#${player}`).fadeOut();
       $(".attack-button").addClass("hide");
       $(".attack-text").text("YOU LOST");
-      $(".health").text("YOU LOST");
+      $(".health").text("THAT'S NO WAY TO WIN AN OSCAR");
       $(".counter-attack-text").text("you will NEVER be famous now!!");
     }
   }
@@ -120,7 +120,10 @@ function checkHealth() {
       //game win
       if (opponentsRemaining === 0) {
         $(".attack-text").text("YOU WON");
-        $(".counter-attack-text").text("you are gonna be a big star!");
+        $(".counter-attack-text").text(
+          "great job, kid! you are gonna be a big star!"
+        );
+        $(".opponent-health").text("A-List Status: APPROVED");
       }
     }
   }
